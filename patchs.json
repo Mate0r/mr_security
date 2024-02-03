@@ -1,0 +1,2013 @@
+{
+    "CVE-2023-28843": {
+        "cve_id": "CVE-2023-28843",
+        "action": "replace",
+        "version_min": "3.12.0",
+        "version_max": "3.16.3",
+        "files": {
+            "/modules/paypal/ipn.php": {
+                "text_to_match": [
+                    "Db::getInstance()->insert('paypal_hss_email_error', array('id_cart' => $custom['id_cart'], 'email' => Tools::getValue('receiver_email')));"
+                ],
+                "text_to_replace": [
+                    "Db::getInstance()->insert('paypal_hss_email_error', array('id_cart' => (int) $custom['id_cart'], 'email' => pSQL(Tools::getValue('receiver_email', ''))));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45378": {
+        "cve_id": "CVE-2023-45378",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.4.7",
+        "files": {
+            "/modules/prestablog/slider_position.php": {
+                "text_to_match": [
+                    "WHERE `id_slide` = '.(int)$id_slide.' AND `id_lang` = '.Tools::getValue('languesup')"
+                ],
+                "text_to_replace": [
+                    "WHERE `id_slide` = '.(int)$id_slide.' AND `id_lang` = '.(int) Tools::getValue('languesup')"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43985": {
+        "cve_id": "CVE-2023-43985",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.0",
+        "files": {
+            "/modules/stblogsearch/classes/StBlogSearchClass.php": {
+                "text_to_match": [
+                    "$search_extra .= ' OR bl.name LIKE \"%'.$search.'%\"';",
+                    "$search_extra .= ' OR bl.author LIKE \"%'.$search.'%\"';",
+                    "$search_extra .= ' OR bcl.name LIKE \"%'.$search.'%\"';",
+                    "$search_extra .= ' OR bl.content_short LIKE \"%'.$search.'%\"';",
+                    "$search_extra .= ' OR bl.content LIKE \"%'.$search.'%\"';",
+                    "AND name like \"%'.$search.'%\""
+                ],
+                "text_to_replace": [
+                    "$search_extra .= ' OR bl.name LIKE \"%'.pSQL($search).'%\"';",
+                    "$search_extra .= ' OR bl.author LIKE \"%'.pSQL($search).'%\"';",
+                    "$search_extra .= ' OR bcl.name LIKE \"%'.pSQL($search).'%\"';",
+                    "$search_extra .= ' OR bl.content_short LIKE \"%'.pSQL($search).'%\"';",
+                    "$search_extra .= ' OR bl.content LIKE \"%'.pSQL($search).'%\"';",
+                    "AND name like \"%'.pSQL($search).'%\""
+                ]
+            }
+        }
+    },
+    "CVE-2023-46351": {
+        "cve_id": "CVE-2023-46351",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.6.0",
+        "files": {
+            "/modules/mib/mib.php": {
+                "text_to_match": [
+                    "('AND cp.`id_category` ='. $category) . ' ' ."
+                ],
+                "text_to_replace": [
+                    "('AND cp.`id_category` ='. (int) $category) . ' ' ."
+                ]
+            }
+        }
+    },
+    "CVE-2023-50030": {
+        "cve_id": "CVE-2023-50030",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.1.0",
+        "files": {
+            "/modules/jmssetting/jmssetting.php": {
+                "text_to_match": [
+                    "$where  = ' WHERE i.`id_product` IN ('.$productids.') AND i.`cover`=0';"
+                ],
+                "text_to_replace": [
+                    "$where  = ' WHERE i.`id_product` IN ('.implode(',', array_map('intval', explode(',', $productids.'))) AND i.`cover`=0';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-50028": {
+        "cve_id": "CVE-2023-50028",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.3.8",
+        "files": {
+            "/modules/blockslidingcart/blockslidingcart.php": {
+                "text_to_match": [
+                    "$crossproductIds = array($id_product);"
+                ],
+                "text_to_replace": [
+                    "$crossproductIds = array_map('intval', explode(',', $id_product));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-50027": {
+        "cve_id": "CVE-2023-50027",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.16",
+        "files": {
+            "/modules/baproductzoommagnifier/controllers/front/zoom.php": {
+                "text_to_match": [
+                    "$search .=\" AND id_lang='$id_lang' AND id_shop = '\".(int) $id_shop.\"'\";"
+                ],
+                "text_to_replace": [
+                    "$search .=\" AND id_lang=\" . (int) $id_lang . \" AND id_shop = \" . (int) $id_shop;"
+                ]
+            }
+        }
+    },
+    "CVE-2023-40921": {
+        "cve_id": "CVE-2023-40921",
+        "action": "replace",
+        "version_min": "4.0.0",
+        "version_max": "4.3.02",
+        "files": {
+            "/modules/soliberte/classes/socolissimo.class.php": {
+                "text_to_match": [
+                    "$formula = \"(6366*acos(cos(radians('$lat'))*cos(radians(`lat`))*cos(radians(`lng`) -radians('$lng'))+sin(radians('$lat'))*sin(radians(`lat`))))\";",
+                    "$formula = \"(6366*acos(cos(radians('$lat'))*cos(radians(`lat`))*cos(radians(`lng`) -radians('$lng'))+sin(radians('$lat'))*sin(radians(`lat`))))\";",
+                    "$sql = 'select `id`, `libelle`, `adresse1`, `adresse2`, `lieudit`, `indice`, `code_postal`, `commune`, `lat`, `lng`, `mobilite_reduite`, `type`, `poids` '."
+                ],
+                "text_to_replace": [
+                    "$formula = \"(6366*acos(cos(radians('\" . (float)$lat . \"'))*cos(radians(`lat`))*cos(radians(`lng`) -radians('\" . (float)$lng . \"'))+sin(radians('\" . (float) $lat . >",
+                    "$formula = \"(6366*acos(cos(radians('\" . (float)$lat . \"'))*cos(radians(`lat`))*cos(radians(`lng`) -radians('\" . (float)$lng . \"'))+sin(radians('\" . (float) $lat . >",
+                    "$sql = 'select `id`, `libelle`, `adresse1`, `adresse2`, `lieudit`, `indice`, `code_postal`, `commune`, `la t`, `lng`, `mobilite_reduite`, `type`, `poids` '."
+                ]
+            }
+        }
+    },
+    "CVE-2023-46989": {
+        "cve_id": "CVE-2023-46989",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.3.99",
+        "files": {
+            "/modules/idxquickorder/controllers/front/productlist.php": {
+                "text_to_match": [
+                    "$limit_ini = Tools::getValue('limitini');",
+                    "$limit_end = Tools::getValue('limitend');",
+                    "$this->ajaxProcessProductlist($limit_ini, $limit_end, Tools::getValue('catid'));"
+                ],
+                "text_to_replace": [
+                    "$limit_ini = (int) Tools::getValue('limitini');",
+                    "$limit_end = (int) Tools::getValue('limitend');",
+                    "$this->ajaxProcessProductlist($limit_ini, $limit_end, (int) Tools::getValue('catid'));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46348": {
+        "cve_id": "CVE-2023-46348",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.1.11",
+        "files": {
+            "/modules/sturls/sturls.php": {
+                "text_to_match": [
+                    "WHERE `link_rewrite` = \"'.$top_parent_name.'\"",
+                    "WHERE `link_rewrite` = \"'.$parent_name.'\"",
+                    "WHERE `'.$field.'` = \"'.$rewrite.'\"",
+                    "'.($has_ref ? 'AND reference=\"'.$reference.'\"' : '').'",
+                    "'.($id_parent ? 'AND id_parent IN ('.implode(',',$id_parent).')' : '').'",
+                    "WHERE link_rewrite = \"'.$rewrite.'\"",
+                    "WHERE link_rewrite = \"'.$rewrite.'\""
+                ],
+                "text_to_replace": [
+                    "WHERE `link_rewrite` = \"'.pSQL($top_parent_name).'\"",
+                    "WHERE `link_rewrite` = \"'.pSQL($parent_name).'\"",
+                    "WHERE `'.bqSQL($field).'` = \"'.pSQL($rewrite).'\"",
+                    "'.($has_ref ? 'AND reference=\"'.pSQL($reference).'\"' : '').'",
+                    "'.($id_parent ? 'AND id_parent IN ('.implode(',', array_map('intval', $id_parent)).')' : '').'",
+                    "WHERE link_rewrite = \"'.$pSQL($rewrite).'\"",
+                    "WHERE link_rewrite = \"'.$pSQL($rewrite).'\""
+                ]
+            }
+        }
+    },
+    "CVE-2023-48925": {
+        "cve_id": "CVE-2023-48925",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.5",
+        "files": {
+            "/modules/bavideotab/controllers/front/confirmdelete.php": {
+                "text_to_match": [
+                    "$id_product=Tools::getValue('id');",
+                    "$id_lang = Tools::getValue('id_lang');"
+                ],
+                "text_to_replace": [
+                    "$id_product = (int) Tools::getValue('id');",
+                    "$id_lang = (int) Tools::getValue('id_lang');"
+                ]
+            },
+            "/modules/bavideotab/controllers/front/savevideo.php": {
+                "text_to_match": [
+                    "$id_shop = Tools::getValue('id_shop');",
+                    "$type_video = Tools::getValue('type_video');",
+                    "$id_product = Tools::getValue('id_product');",
+                    "$sql .= \"\".$video_upload_default.\"','\".$name_lang_default.\"','\".$name_shop.\"','\";",
+                    "$sql .= \"\".$video_upload_default.\"','\".$value['name'].\"','\".$name_shop.\"','\";",
+                    "$sql .= \"\".$video_url.\"','\".$value['name'].\"','\".$name_shop.\"','\";",
+                    "$sql .= \"\".$id_shop.\"','\".$video_url.\"','\".$value['name'].\"','\".$name_shop.\"','\";",
+                    "$sql .= \"\".$name_shop.\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";",
+                    "$sql .= \"\".$name_shop.\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";",
+                    "$sql .= \"\".$name_shop.\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";"
+                ],
+                "text_to_replace": [
+                    "$id_shop = (int) Tools::getValue('id_shop');",
+                    "$type_video = (int) Tools::getValue('type_video');",
+                    "$id_product = (int) Tools::getValue('id_product');",
+                    "$sql .= \"\".$video_upload_default.\"','\".$name_lang_default.\"','\".pSQL($name_shop).\"','\";",
+                    "$sql .= \"\".$video_upload_default.\"','\".$value['name'].\"','\".pSQL($name_shop).\"','\";",
+                    "$sql .= \"\".$video_url.\"','\".$value['name'].\"','\".pSQL($name_shop).\"','\";",
+                    "$sql .= \"\".$id_shop.\"','\".$video_url.\"','\".$value['name'].\"','\".pSQL($name_shop).\"','\";",
+                    "$sql .= \"\".pSQL($name_shop).\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";",
+                    "$sql .= \"\".pSQL($name_shop).\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";",
+                    "$sql .= \"\".pSQL($name_shop).\"','\".$name_product.\"','\".$type_video.\"','\".$value_lang['id_lang'].\"')\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46353": {
+        "cve_id": "CVE-2023-48925",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.8.3",
+        "files": {
+            "/modules/ticons/models/TiconProduct.php": {
+                "text_to_match": [
+                    "LEFT JOIN `' . _DB_PREFIX_ . 'product_lang` b ON (b.`id_product` = a.`id_product` AND b.`id_lang` = ' . (int)Context::getContext()->language->id . ') WHERE a.id_product =\"' . $id_product . '\" ' . Shop::addSqlRestriction(false, 'b') . ' AND a.id_ticon=\"' . $id_ticon . '\"');"
+                ],
+                "text_to_replace": [
+                    "LEFT JOIN `' . _DB_PREFIX_ . 'product_lang` b ON (b.`id_product` = a.`id_product` AND b.`id_lang` = ' . (int)Context::getContext()->language->id . ') WHERE a.id_product =\"' . (int) $id_product . '\" ' . Shop::addSqlRestriction(false, 'b') . ' AND a.id_ticon=\"' . (int) $id_ticon . '\"');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46349": {
+        "cve_id": "CVE-2023-46349",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.7.6",
+        "files": {
+            "/modules/updateproducts/datamodel.php": {
+                "text_to_match": [
+                    "$where .= \" AND p.id_manufacturer IN (\".pSQL($selected_manufacturers).\") \";",
+                    "$where .= \" AND s.id_supplier IN (\".pSQL($selected_suppliers).\") \";",
+                    "$where .= \" AND cp.id_category IN (\".pSQL($selected_categories).\") \";",
+                    "$where .= \" $justProducts p.id_product IN (\".pSQL($products_check).\") \";"
+                ],
+                "text_to_replace": [
+                    "$where .= \" AND p.id_manufacturer IN (\".implode(',', array_map('intval', explode(',', $selected_manufacturers))).\") \";",
+                    "$where .= \" AND s.id_supplier IN (\".implode(',', array_map('intval', explode(',', $selected_suppliers))).\") \";",
+                    "$where .= \" AND cp.id_category IN (\".implode(',', array_map('intval', explode(',', $selected_categories))).\") \";",
+                    "$where .= \" $justProducts p.id_product IN (\".implode(',', array_map('intval', explode(',', $products_check))).\") \";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-48188": {
+        "cve_id": "CVE-2023-48188",
+        "action": "replace",
+        "version_min": "4.5.18",
+        "version_max": "4.6.12",
+        "files": {
+            "/modules/opartdevis/override/classes/Translate.php": {
+                "text_to_match": [
+                    "WHERE id_opartdevis = '.Tools::getValue('id_opartdevis'));"
+                ],
+                "text_to_replace": [
+                    "WHERE id_opartdevis = '.(int) Tools::getValue('id_opartdevis'));"
+                ]
+            },
+            "/override/classes/Translate.php": {
+                "text_to_match": [
+                    "WHERE id_opartdevis = '.Tools::getValue('id_opartdevis'));"
+                ],
+                "text_to_replace": [
+                    "WHERE id_opartdevis = '.(int) Tools::getValue('id_opartdevis'));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46357": {
+        "cve_id": "CVE-2023-46357",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.4.99",
+        "files": {
+            "/modules/motivationsale/datamodel.php": {
+                "text_to_match": [
+                    "AND p.id_product IN ('.pSQL($product_ids).')"
+                ],
+                "text_to_replace": [
+                    "AND p.id_product IN ('.implode(',', array_map('intval', explode(',',$product_ids))).')"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45377": {
+        "cve_id": "CVE-2023-46357",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "6.2.1",
+        "files": {
+            "/modules/chronopost/async/cancelSkybill.php": {
+                "text_to_match": [
+                    "if (!Tools::getIsset('shared_secret') || Tools::getValue('shared_secret') != Configuration::get('CHRONOPOST_SECRET')) {",
+                    ". _DB_PREFIX_ . 'chrono_lt_history WHERE id_order = ' . (int)Tools::getValue('id_order') . ' AND `cancelled` IS NULL AND lt = \"' . Tools::getValue('skybill') . '\"'"
+                ],
+                "text_to_replace": [
+                    "if (Tools::isEmpty('shared_secret') || Tools::getValue('shared_secret') !== Configuration::get('CHRONOPOST_SECRET')) {",
+                    ". _DB_PREFIX_ . 'chrono_lt_history WHERE id_order = ' . (int)Tools::getValue('id_order') . ' AND `cancelled` IS NULL AND lt = \"' . pSQL(Tools::getValue('skybill')) . '\"'"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45382": {
+        "cve_id": "CVE-2023-45382",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.1.0",
+        "files": {
+            "/modules/sonice_retour/functions/downloadLabel.php": {
+                "text_to_match": [
+                    "$file = $_REQUEST['file'];"
+                ],
+                "text_to_replace": [
+                    "$file = basename($_REQUEST['file']);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45387": {
+        "cve_id": "CVE-2023-45387",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "5.0.0",
+        "files": {
+            "/modules/exportproducts/export.php": {
+                "text_to_match": [
+                    "$data['id_task'] = Tools::getValue('id_task');"
+                ],
+                "text_to_replace": [
+                    "$data['id_task'] = (int) Tools::getValue('id_task');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43979": {
+        "cve_id": "CVE-2023-43979",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.3.8",
+        "files": {
+            "/modules/ybc_blog/controllers/front/blog.php": {
+                "text_to_match": [
+                    "$filter .= \" AND p.id_post IN (SELECT id_post FROM `\" . _DB_PREFIX_ . \"ybc_blog_tag` WHERE tag = '$tag' AND id_lang = \" . $this->context->language->id . \")\";"
+                ],
+                "text_to_replace": [
+                    "$filter .= \" AND p.id_post IN (SELECT id_post FROM `\" . _DB_PREFIX_ . \"ybc_blog_tag` WHERE tag = '\" . pSQL($tag) . \"' AND id_lang = \" . $this->context->language->id . \")\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-47309": {
+        "cve_id": "CVE-2023-47309",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.0.1",
+        "files": {
+            "/modules/nkmgls/controllers/front/checkout.php": {
+                "text_to_match": [
+                    "$phone_mobile = Tools::getValue('gls_customer_mobile');"
+                ],
+                "text_to_replace": [
+                    "if (!Validate::isPhoneNumber($phone_mobile)) {\n\t$return['message'] = 'Please fill-in a valid mobile number (e.g. +XXXXXXXXXXX or 0XXXXXXXXX).';\n\theader('Content-Type: application/json');\n\t$this->ajaxDie(json_encode($return));\n}"
+                ]
+            },
+            "/views/templates/admin/gls_label/label_list.tpl": {
+                "text_to_match": [
+                    "<input class=\"form-control\" type=\"tel\" name=\"mobile\" value=\"{if !empty($tr.customer_phone_mobile)}{$tr.customer_phone_mobile}{else}{$tr.customer_phone}{/if}\" required=\"required\" />"
+                ],
+                "text_to_replace": [
+                    "<input class=\"form-control\" type=\"tel\" name=\"mobile\" value=\"{if !empty($tr.customer_phone_mobile)}{$tr.customer_phone_mobile|escape:'html':'UTF-8'}{else}{$tr.customer_phone|escape:'html':'UTF-8'}{/if}\" required=\"required\" />"
+                ]
+            }
+        }
+    },
+    "CVE-2023-40923": {
+        "cve_id": "CVE-2023-40923",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "5.0.0",
+        "files": {
+            "/ordersexport/send.php": {
+                "text_to_match": [
+                    "Db::getInstance()->delete('exported_order', 'settings=\"'.trim($key).'\"');",
+                    "Db::getInstance()->delete('exported_order', 'settings=\"'.trim(Tools::getValue('save_setting')).'\"');"
+                ],
+                "text_to_replace": [
+                    "Db::getInstance()->delete('exported_order', 'settings=\"'.pSQL($key).'\"');",
+                    "Db::getInstance()->delete('exported_order', 'settings=\"'.pSQL(Tools::getValue('save_setting')).'\"');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-47308": {
+        "cve_id": "CVE-2023-47308",
+        "action": "replace",
+        "versions": [
+            "2.3.1-2.4.53",
+            "2.3.1-2.4.53"
+        ],
+        "version_min": "2.3.1",
+        "version_max": "2.4.53",
+        "files": {
+            "/modules/newsletterpop/controllers/front/sendVerification.php": {
+                "text_to_match": [
+                    "$emailNewsletter = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletter` WHERE `email`=\"'.$email.'\"');",
+                    "$emailNewsletterPop = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletterpop` WHERE `email`=\"'.$email.'\"');",
+                    "$emailNewsletter = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'emailsubscription` WHERE `email`=\"'.$email.'\"');",
+                    "$emailNewsletterPop = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletterpop` WHERE `email`=\"'.$email.'\"');"
+                ],
+                "text_to_replace": [
+                    "$emailNewsletter = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletter` WHERE `email`=\"'.pSQL($email).'\"');",
+                    "$emailNewsletterPop = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletterpop` WHERE `email`=\"'.pSQL($email).'\"');",
+                    "$emailNewsletter = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'emailsubscription` WHERE `email`=\"'.pSQL($email).'\"');",
+                    "$emailNewsletterPop = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('SELECT `email` FROM `'._DB_PREFIX_.'newsletterpop` WHERE `email`=\"'.pSQL($email).'\"');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-40922": {
+        "cve_id": "CVE-2023-40922",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.5.0",
+        "files": {
+            "/modules/kerawen/controllers/front/delivery.php": {
+                "text_to_match": [
+                    "VALUES ('. (int) $id_cart .', FROM_UNIXTIME('.$date.'))"
+                ],
+                "text_to_replace": [
+                    "VALUES ('. (int) $id_cart .', FROM_UNIXTIME(\"'.pSQL($date).'\"))"
+                ]
+            }
+        }
+    },
+    "CVE-2023-44025": {
+        "cve_id": "CVE-2023-44025",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.2",
+        "files": {
+            "/modules/addifyfreegifts/controllers/front/addtocart.php": {
+                "text_to_match": [
+                    "$this->context->cookie->__set('Rule_Ids_manual', $id_rule);"
+                ],
+                "text_to_replace": [
+                    "$this->context->cookie->__set('Rule_Ids_manual', (int) $id_rule);"
+                ]
+            },
+            "/modules/addifyfreegifts/classes/AddifyfreegiftsModel.php": {
+                "text_to_match": [
+                    "FROM `'._DB_PREFIX_.'addifyfreegifts`WHERE rule_active = 1 AND id = '.$rule_id);"
+                ],
+                "text_to_replace": [
+                    "FROM `'._DB_PREFIX_.'addifyfreegifts`WHERE rule_active = 1 AND id = '. (int) $rule_id);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46356": {
+        "cve_id": "CVE-2023-46356",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.5.2",
+        "files": {
+            "/modules/csvfeeds/search.php": {
+                "text_to_match": [
+                    "$where_selected = ' AND l.id_product NOT IN ('.$selected_products.')';"
+                ],
+                "text_to_replace": [
+                    "$where_selected = ' AND l.id_product NOT IN ('.implode(',', array_map('intval', explode(',', $selected_products))).')';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-36263": {
+        "cve_id": "CVE-2023-36263",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.4.5",
+        "files": {
+            "/modules/opartlimitquantity/controllers/front/alertlimit.php": {
+                "text_to_match": [
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_batch WHERE id_product = '.$id_product);",
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_attribute_batch WHERE id_product = '.$id_product.' AND id_product_attribute = '.$id_attribute);",
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_batch WHERE id_product = '.$id_product);"
+                ],
+                "text_to_replace": [
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_batch WHERE id_product = '.(int)$id_product);",
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_attribute_batch WHERE id_product = '.(int)$id_product.' AND id_product_attribute = '.(int)$id_attribute);",
+                    "$values = Db::getInstance()->getRow('SELECT quantity,batch_type FROM '._DB_PREFIX_.'opartlimitquantity_product_batch WHERE id_product = '.(int)$id_product);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43139": {
+        "cve_id": "CVE-2023-43139",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/franfinance/validation.php": {
+                "text_to_match": [
+                    "exec()"
+                ],
+                "text_to_replace": [
+                    "exec()"
+                ]
+            },
+            "/modules/franfinance/controllers/front/validation.php": {
+                "text_to_match": [
+                    "exec()"
+                ],
+                "text_to_replace": [
+                    "exec()"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46358": {
+        "cve_id": "CVE-2023-46358",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/referralbyphone/controllers/front/default.php": {
+                "text_to_match": [
+                    "'SELECT `id_ws_sponsor` FROM `' . _DB_PREFIX_ . 'ws_ref_coupon_rule` WHERE `code` = \\'' . $ws_voucher . '\\''"
+                ],
+                "text_to_replace": [
+                    "'SELECT `id_ws_sponsor` FROM `' . _DB_PREFIX_ . 'ws_ref_coupon_rule` WHERE `code` = \\'' . pSQL($ws_voucher) . '\\''"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46347": {
+        "cve_id": "CVE-2023-46347",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.5.6",
+        "files": {
+            "/modules/ndk_steppingpack/models/ndkSpack.php": {
+                "text_to_match": [
+                    "$where_product .= ' AND (cpl.name LIKE \"%'.$query.'%\" OR cpl.description LIKE \"%'.$query.'%\" OR cpl.short_description LIKE \"%'.$query.'%\")';"
+                ],
+                "text_to_replace": [
+                    "$where_product .= ' AND (cpl.name LIKE \"%'.pSQL($query).'%\" OR cpl.description LIKE \"%'.pSQL($query).'%\" OR cpl.short_description LIKE \"%'.pSQL($query).'%\")';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45376": {
+        "cve_id": "CVE-2023-45376",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.5.0",
+        "files": {
+            "/modules/hicarouselspack/hicarouselspack.php": {
+                "text_to_match": [
+                    "$this->addNewViewedProductId(Tools::getValue('id_product'));"
+                ],
+                "text_to_replace": [
+                    "$this->addNewViewedProductId((int) Tools::getValue('id_product'));"
+                ]
+            },
+            "/modules/hicarouselspack/classes/HiProductGetter.php": {
+                "text_to_match": [
+                    "WHERE p.`id_product` IN ('.pSQL(implode(',', $ids)).')';"
+                ],
+                "text_to_replace": [
+                    "WHERE p.`id_product` IN ('.implode(',', array_map('intval', $ids)).')';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45381": {
+        "cve_id": "CVE-2023-45381",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.6.9",
+        "files": {
+            "/modules/creativepopup/helper.php": {
+                "text_to_match": [
+                    "Db::getInstance()->update('creativepopup', array('name' => $title), 'id = '.$import->lastImportId);"
+                ],
+                "text_to_replace": [
+                    "Db::getInstance()->update('creativepopup', array('name' => pSQL($title)), 'id = '.$import->lastImportId);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43986": {
+        "cve_id": "CVE-2023-43986",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.9.3",
+        "files": {
+            "/modules/configurator/classes/ConfiguratorAttachment.php": {
+                "text_to_match": [
+                    "->where('token = \"' . $token . '\"');"
+                ],
+                "text_to_replace": [
+                    "->where('token = \"' . pSQL($token) . '\"');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45384": {
+        "cve_id": "CVE-2023-45384",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "6.0.6",
+        "files": {
+            "/modules/supercheckout/supercheckout.php": {
+                "text_to_match": [
+                    ""
+                ],
+                "text_to_replace": [
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2023-45379": {
+        "cve_id": "CVE-2023-45379",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.1.0",
+        "files": {
+            "/modules/posrotatorimg/ajax.php": {
+                "text_to_match": [
+                    "$id_product = $params['id_product'];",
+                    "$id = $params['img_id'];"
+                ],
+                "text_to_replace": [
+                    "$id_product = (int) $params['id_product'];",
+                    "$id = (int) $params['img_id'];"
+                ]
+            }
+        }
+    },
+    "CVE-2023-45375": {
+        "cve_id": "CVE-2023-45375",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.7.9",
+        "files": {
+            "/modules/pireospay/controllers/front/validation.php": {
+                "text_to_match": [
+                    "$query = 'SELECT * FROM `' . _DB_PREFIX_ . 'pireospay` WHERE cart_id=\"' . $post_data_array[7] . '\"';",
+                    "$id = $params['img_id'];"
+                ],
+                "text_to_replace": [
+                    "'pireospay where cart_id=\"' . addslashes($post_data_array[7]) .",
+                    "'pireospay where cart_id=\"' . pSQL($post_data_array[7]) ."
+                ]
+            }
+        }
+    },
+    "CVE-2023-45386": {
+        "cve_id": "CVE-2023-45386",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.2.7",
+        "files": {
+            "/modules/extratabspro/extratabspro.php": {
+                "text_to_match": [
+                    "return Db::getInstance()->ExecuteS('SELECT `id_supplier`,`name` FROM `' . _DB_PREFIX_ . 'supplier` WHERE `name` like \"%' . $search . '%\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_supplier` FROM `' . _DB_PREFIX_ . 'product_supplier` WHERE `id_product`= ' . $id . ' GROUP BY id_supplier');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_feature_value`,`value` as name FROM `' . _DB_PREFIX_ . 'feature_value_lang` WHERE `value` like \"%' . (string )$search . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_category`,`name` FROM `' . _DB_PREFIX_ . 'category_lang` WHERE `name` like \"%' . $search . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" AND id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_product`,`name` FROM `' . _DB_PREFIX_ . 'product_lang` WHERE `name` like \"%' . $search . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" AND id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT m.`id_manufacturer`,m.`name` FROM `' . _DB_PREFIX_ . 'manufacturer` m LEFT JOIN `' . _DB_PREFIX_ . 'manufacturer_shop` ms ON ms.id_manufacturer = m.id_manufacturer WHERE `name` like \"%' . $search . '%\" AND ms.id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');"
+                ],
+                "text_to_replace": [
+                    "return Db::getInstance()->ExecuteS('SELECT `id_supplier`,`name` FROM `' . _DB_PREFIX_ . 'supplier` WHERE `name` like \"%' . pSQL($search) . '%\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_supplier` FROM `' . _DB_PREFIX_ . 'product_supplier` WHERE `id_product`= ' . (int) $id . ' GROUP BY id_supplier');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_feature_value`,`value` as name FROM `' . _DB_PREFIX_ . 'feature_value_lang` WHERE `value` like \"%' . pSQL($search) . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_category`,`name` FROM `' . _DB_PREFIX_ . 'category_lang` WHERE `name` like \"%' . pSQL($search) . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" AND id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT `id_product`,`name` FROM `' . _DB_PREFIX_ . 'product_lang` WHERE `name` like \"%' . pSQL($search) . '%\" AND id_lang=\"' . Configuration::get('PS_LANG_DEFAULT') . '\" AND id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');",
+                    "return Db::getInstance()->ExecuteS('SELECT m.`id_manufacturer`,m.`name` FROM `' . _DB_PREFIX_ . 'manufacturer` m LEFT JOIN `' . _DB_PREFIX_ . 'manufacturer_shop` ms ON ms.id_manufacturer = m.id_manufacturer WHERE `name` like \"%' . pSQL($search) . '%\" AND ms.id_shop=\"' . $this->context->shop->id . '\" LIMIT 10');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-37824": {
+        "cve_id": "CVE-2023-37824",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/sitologapplicationconnect/sitologapplicationconnect.php": {
+                "text_to_match": [
+                    ""
+                ],
+                "text_to_replace": [
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2023-30154": {
+        "cve_id": "CVE-2023-30154",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.2.0",
+        "files": {
+            "/modules/aftermailpresta/aftermailajax.php": {
+                "text_to_match": [
+                    "$result = Db::getInstance()->ExecuteS('SELECT * FROM `' . _DB_PREFIX_ . 'aftermail_queue` ' . 'WHERE id_product = ' . $id_product . ' AND id_customer = ' . $id_customer);",
+                    "$success = Db::getInstance()->execute('DELETE FROM `' . _DB_PREFIX_ . 'aftermail_queue` WHERE id_product = ' . $id_product . ' AND id_customer = ' . $id_customer . ' AND id_aftermail_conf = ' . $id_conf . ' AND unsubscribe = \"' . $token . '\"');",
+                    "$success = Db::getInstance()->execute('DELETE FROM `' . _DB_PREFIX_ . 'aftermail_queue` WHERE id_customer = ' . $id_customer . ' AND unsubscribe_all = \"' . $token . '\"');"
+                ],
+                "text_to_replace": [
+                    "$result = Db::getInstance()->ExecuteS('SELECT * FROM `' . _DB_PREFIX_ . 'aftermail_queue` ' . 'WHERE id_product = ' . (int)$id_product . ' AND id_customer = ' . (int)$id_customer);",
+                    "$success = Db::getInstance()->execute('DELETE FROM `' . _DB_PREFIX_ . 'aftermail_queue` WHERE id_product = ' . (int)$id_product . ' AND id_customer = ' . (int)$id_customer . ' AND id_aftermail_conf = ' . (int)$id_conf . ' AND unsubscribe = \"' . pSQL($token) . '\"');",
+                    "$success = Db::getInstance()->execute('DELETE FROM `' . _DB_PREFIX_ . 'aftermail_queue` WHERE id_customer = ' . (int)$id_customer . ' AND unsubscribe_all = \"' . pSQL($token) . '\"');"
+                ]
+            },
+            "modules/aftermailpresta/aftermailpresta.php": {
+                "text_to_match": [
+                    "$result2 = Db::getInstance()->ExecuteS('SELECT * FROM `' . _DB_PREFIX_ . 'aftermail_queue` ' . 'WHERE id_product = ' . Tools::getValue(\"id_product\") . ' AND id_customer = ' . $this->context->customer->id);"
+                ],
+                "text_to_replace": [
+                    "$result2 = Db::getInstance()->ExecuteS('SELECT * FROM `' . _DB_PREFIX_ . 'aftermail_queue` ' . 'WHERE id_product = ' . (int)Tools::getValue(\"id_product\") . ' AND id_customer = ' . $this->context->customer->id);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-44024": {
+        "cve_id": "CVE-2023-44024",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "8.0.3",
+        "files": {
+            "/modules/supercheckout/controllers/front/supercheckout.php": {
+                "text_to_match": [
+                    "WHERE COLUMN_NAME = \"' . $field_name . '\"",
+                    "$sql = 'UPDATE ' . _DB_PREFIX_ . 'kb_checkout_behaviour_stats SET ' . pSQL($field_name) . ' = ' . (int) $filled . ' WHERE id_cart = ' . (int) $this->context->cart->id;",
+                    "$sql = 'UPDATE ' . _DB_PREFIX_ . 'kb_checkout_behaviour_stats SET ' . pSQL($field_name) . '_invoice = ' . (int) $filled . ' WHERE id_cart = ' . (int) $this->context->cart->id;"
+                ],
+                "text_to_replace": [
+                    "WHERE COLUMN_NAME = \"' . pSQL($field_name) . '\"",
+                    "$sql = 'UPDATE ' . _DB_PREFIX_ . 'kb_checkout_behaviour_stats SET `' . bqSQL($field_name) . '` = ' . (int) $filled . ' WHERE id_cart = ' . (int) $this->context->cart->id;",
+                    "$sql = 'UPDATE ' . _DB_PREFIX_ . 'kb_checkout_behaviour_stats SET `' . bqSQL($field_name) . '_invoice` = ' . (int) $filled . ' WHERE id_cart = ' . (int) $this->context->cart->id;"
+                ]
+            }
+        }
+    },
+    "CVE-2023-40920": {
+        "cve_id": "CVE-2023-40920",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.61.0",
+        "files": {
+            "/prixanconnect/controllers/front/Products.php": {
+                "text_to_match": [
+                    ""
+                ],
+                "text_to_replace": [
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2023-43981": {
+        "cve_id": "CVE-2023-43981",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/testsitecreator/lib/verify_excluded_folder.php": {
+                "text_to_match": [
+                    "$tsc_excluded_folders = unserialize(Tools::getValue('tsc_excluded_folders'));"
+                ],
+                "text_to_replace": [
+                    "$tsc_excluded_folders = unserialize(Tools::getValue('tsc_excluded_folders'), ['allowed_classes' => false]);"
+                ]
+            },
+            "/modules/testsitecreator/lib/delete_excluded_folder.php": {
+                "text_to_match": [
+                    "$tsc_excluded_folders = unserialize(Tools::getValue('tsc_excluded_folders'));"
+                ],
+                "text_to_replace": [
+                    "$tsc_excluded_folders = unserialize(Tools::getValue('tsc_excluded_folders'), ['allowed_classes' => false]);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43983": {
+        "cve_id": "CVE-2023-43983",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/attributegrid/disable_json.php": {
+                "text_to_match": [
+                    "WHERE pa.`id_product` in ('.$_POST['products'].')';"
+                ],
+                "text_to_replace": [
+                    "WHERE pa.`id_product` in ('.implode(',', array_map('intval', explode(',', $_POST['products']))).')';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-43980": {
+        "cve_id": "CVE-2023-43980",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/testsitecreator/classes/TestSiteClass.php": {
+                "text_to_match": [
+                    "'.(is_null($id_testsitecreator) ? 'AND `name_testsitecreator` = \"'.$name_testsitecreator.'\"' : 'AND `id_testsitecreator` = '.$id_testsitecreator).'"
+                ],
+                "text_to_replace": [
+                    "'.(is_null($id_testsitecreator) ? 'AND `name_testsitecreator` = \"'.pSQL($name_testsitecreator).'\"' : 'AND `id_testsitecreator` = '.(int) $id_testsitecreator).'"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39648": {
+        "cve_id": "CVE-2023-39648",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/tvcmstestimonial/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmstestimonial` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmstestimonial` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39645": {
+        "cve_id": "CVE-2023-39645",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/tvcmspaymenticon/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmspaymenticon` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmspaymenticon` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39649": {
+        "cve_id": "CVE-2023-39649",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/id_tvcmscategoryslider/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmscategoryslider` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmscategoryslider` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39647": {
+        "cve_id": "CVE-2023-39647",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/id_tvcmscategoryproduct/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmscategoryproduct` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmscategoryproduct` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39646": {
+        "cve_id": "CVE-2023-39646",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/tvcmscategorychainslider/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmscategorychainslider` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmscategorychainslider` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39651": {
+        "cve_id": "CVE-2023-39651",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/tvcmsbrandlist/ajax.php": {
+                "text_to_match": [
+                    "`position` = ' . $pos . '",
+                    "`id_tvcmsbrandlist` = ' . $value . ';';"
+                ],
+                "text_to_replace": [
+                    "`position` = ' . (int) $pos . '",
+                    "`id_tvcmsbrandlist` = ' . (int) $value . ';';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39675": {
+        "cve_id": "CVE-2023-39675",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "0.2.1",
+        "files": {
+            "/modules/simpleimportproduct/send.php": {
+                "text_to_match": [
+                    "Db::getInstance()->delete('simpleimport_tasks', \"import_settings=$key\");"
+                ],
+                "text_to_replace": [
+                    "Db::getInstance()->delete('simpleimport_tasks', \"import_settings='\".$key.\"'\");"
+                ]
+            }
+        }
+    },
+    "CVE-2023-34575": {
+        "cve_id": "CVE-2023-34575",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.0.7",
+        "files": {
+            "/modules/opartsavecart/controllers/front/default.php": {
+                "text_to_match": [
+                    "$sql = \"DELETE FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE id_cart=\" . $idCart . \" AND id_customer=\" . $idCustomer;",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE id_customer=\" . $idCustomer . \" AND id_cart=\" . $idCart;",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE token = '\" . $token . \"'\";",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE token = '\" . $token . \"'\";"
+                ],
+                "text_to_replace": [
+                    "$sql = \"DELETE FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE id_cart=\" . (int)$idCart . \" AND id_customer=\" . (int)$idCustomer;",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE id_customer=\" . (int)$idCustomer . \" AND id_cart=\" . (int)$idCart;",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE token = '\" . pSQL($token) . \"'\";",
+                    "$sql = \"SELECT * FROM `\" . _DB_PREFIX_ . \"opartsavecart` WHERE token = '\" . pSQL($token) . \"'\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-34577": {
+        "cve_id": "CVE-2023-34577",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.4.11",
+        "files": {
+            "/modules/opartplannedpopup/opartplannedpopup.php": {
+                "text_to_match": [
+                    "$where = 'p.display_order=\"\" OR (p.display_order LIKE \"'.$current_step.'\" OR ';",
+                    "$where .= 'p.display_order LIKE \"'.$current_step.',%\" OR p.display_order LIKE \"%,'.$current_step.',%\" OR ';",
+                    "$where .= 'p.display_order LIKE \"%,'.$current_step.'\")';"
+                ],
+                "text_to_replace": [
+                    "$where = 'p.display_order=\"\" OR (p.display_order LIKE \"'.(int)$current_step.'\" OR ';",
+                    "$where .= 'p.display_order LIKE \"'.(int)$current_step.',%\" OR p.display_order LIKE \"%,'.(int)$current_step.',%\" OR ';",
+                    "$where .= 'p.display_order LIKE \"%,'.(int)$current_step.'\")';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-34576": {
+        "cve_id": "CVE-2023-34576",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.3",
+        "files": {
+            "/modules/opartfaq/updatepost.php": {
+                "text_to_match": [
+                    "'position' => $value",
+                    "'position' => (int) $value"
+                ],
+                "text_to_replace": [
+                    "),'id_product='.$_POST['opartFaqIdProductPos'].' AND id_opartfaq_questions='.$key);",
+                    "),'id_product='. (int) $_POST['opartFaqIdProductPos'].' AND id_opartfaq_questions='. (int) $key);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39528": {
+        "cve_id": "CVE-2023-39528",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "8.1.0",
+        "files": {
+            "/controllers/admin/AdminTranslationsController.php": {
+                "text_to_match": [
+                    "if (file_exists($email_file)) {"
+                ],
+                "text_to_replace": [
+                    "if (strpos(realpath($email_file), _PS_ROOT_DIR_) === 0 && file_exists($email_file)) {"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39641": {
+        "cve_id": "CVE-2023-39641",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.9.7",
+        "files": {
+            "/modules/psaffiliate/controllers/front/getaffiliatesdetails.php": {
+                "text_to_match": [
+                    "$result = Db::getInstance()->executeS('SELECT `id_affiliate` FROM `'._DB_PREFIX_.'aff_affiliates` WHERE `id_affiliate` IN ('.pSQL($ids_affiliate).') AND `has_been_reviewed`=\"0\"');"
+                ],
+                "text_to_replace": [
+                    "$result = Db::getInstance()->executeS('SELECT `id_affiliate` FROM `'._DB_PREFIX_.'aff_affiliates` WHERE `id_affiliate` IN ('.implode(',', array_map('intval', explode(',', Tools::getValue('ids_affiliate')))).') AND `has_been_reviewed`=\"0\"');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39639": {
+        "cve_id": "CVE-2023-39639",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.1.2",
+        "files": {
+            "/modules/leoblog/classes/blog.php": {
+                "text_to_match": [
+                    "$sql .= ' WHERE id_lang = ' . $id_lang .\" AND link_rewrite = '\".$parrams['link_rewrite'].\"'\";",
+                    "$where .= ' AND author_name LIKE \"%'.$condition['author_name'].'%\"",
+                    "$where .= ' AND author_name LIKE \"%'.$condition['author_name'].'%\"';"
+                ],
+                "text_to_replace": [
+                    "$sql .= ' WHERE id_lang = ' . $id_lang .\" AND link_rewrite = '\".pSQL($parrams['link_rewrite']).\"'\";",
+                    "$where .= ' AND author_name LIKE \"%'.pSQL($condition['author_name']).'%\"",
+                    "$where .= ' AND author_name LIKE \"%'.pSQL($condition['author_name']).'%\"';"
+                ]
+            },
+            "/modules/leoblog/classes/leoblogcat.php": {
+                "text_to_match": [
+                    "$sql .= ' WHERE id_lang = ' . $id_lang .\" AND link_rewrite = '\".$parrams['link_rewrite'].\"'\";"
+                ],
+                "text_to_replace": [
+                    "$sql .= ' WHERE id_lang = ' . $id_lang .\" AND link_rewrite = '\".pSQL($parrams['link_rewrite']).\"'\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39643": {
+        "cve_id": "CVE-2023-39643",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.9.8",
+        "files": {
+            "/modules/xmlfeeds/xmlfeeds.php": {
+                "text_to_match": [
+                    "$where_selected = ' AND l.id_product NOT IN ('.$selected_products.')';"
+                ],
+                "text_to_replace": [
+                    "$where_selected = ' AND l.id_product NOT IN ('.implode(',', array_map('intval', explode(',', $selected_products))).')';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39642": {
+        "cve_id": "CVE-2023-39642",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.4.2",
+        "files": {
+            "/modules/cartsguru/controllers14/catalog.php": {
+                "text_to_match": [
+                    "$sql .= ' LIMIT ' . pSQL($limit) . ' OFFSET ' . pSQL($offset);"
+                ],
+                "text_to_replace": [
+                    "$sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;"
+                ]
+            },
+            "/modules/cartsguru/controllers/front/catalog.php": {
+                "text_to_match": [
+                    "$sql .= ' LIMIT ' . pSQL($limit) . ' OFFSET ' . pSQL($offset);"
+                ],
+                "text_to_replace": [
+                    "$sql .= ' LIMIT ' . (int) $limit . ' OFFSET ' . (int) $offset;"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39652": {
+        "cve_id": "CVE-2023-39652",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.0",
+        "files": {
+            "/modules/tvcmsvideotab/controllers/front/confirmdelete.php": {
+                "text_to_match": [
+                    "$id_product = Tools::getValue('id');",
+                    "$id_lang = Tools::getValue('id_lang');"
+                ],
+                "text_to_replace": [
+                    "$id_product = (int) Tools::getValue('id');",
+                    "$id_lang = (int) Tools::getValue('id_lang');"
+                ]
+            },
+            "/modules/tvcmsvideotab/controllers/front/savevideo.php": {
+                "text_to_match": [
+                    "$id_shop = Tools::getValue('id_shop');",
+                    "$name_shop = Tools::getValue('name_shop');",
+                    "$type_video = Tools::getValue('type_video');",
+                    "$id_product = Tools::getValue('id_product');",
+                    "$sql .= '' . trim($name_url_array[$value_lang['id_lang']]) . \"','\" . $value_lang['name'] . \"','\";",
+                    "$sql .= '' . trim($name_url_array[$value_lang['id_lang']]) . \"','\" . $value_lang['name'] . \"','\";",
+                    "$sql .= '' . trim($name_url_array[$value_lang['id_lang']]) . \"','\" . $value_lang['name'] . \"','\";"
+                ],
+                "text_to_replace": [
+                    "$id_shop = (int) Tools::getValue('id_shop');",
+                    "$name_shop = pSQL(Tools::getValue('name_shop'));",
+                    "$type_video = pSQL(Tools::getValue('type_video'));",
+                    "$id_product = (int) Tools::getValue('id_product');",
+                    "$sql .= '' . pSQL(trim($name_url_array[$value_lang['id_lang']])) . \"','\" . $value_lang['name'] . \"','\";",
+                    "$sql .= '' . pSQL(trim($name_url_array[$value_lang['id_lang']])) . \"','\" . $value_lang['name'] . \"','\";",
+                    "$sql .= '' . pSQL(trim($name_url_array[$value_lang['id_lang']])) . \"','\" . $value_lang['name'] . \"','\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-39650": {
+        "cve_id": "CVE-2023-39650",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/tvcmsblog/controllers/front/single.php": {
+                "text_to_match": [
+                    "$select_data = 'SELECT MAX(id_view) as max_id FROM `' . _DB_PREFIX_ . 'tvcmsposts_view` where `id_tvcmsposts` = ' . $blogid . ' AND `ipadress` = \\'' . $ipaddress . '\\' ';",
+                    "`id_tvcmsposts` = ' . $blogid . ',",
+                    "ipadress = \\'' . $ipaddress . '\\'';"
+                ],
+                "text_to_replace": [
+                    "$select_data = 'SELECT MAX(id_view) as max_id FROM `' . _DB_PREFIX_ . 'tvcmsposts_view` where `id_tvcmsposts` = ' . (int) $blogid . ' AND `ipadress` = \\'' . pSQL($ipaddress) . '\\' ';",
+                    "`id_tvcmsposts` = ' . (int) $blogid . ',",
+                    "ipadress = \\'' . pSQL($ipaddress) . '\\'';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-33666": {
+        "cve_id": "CVE-2023-33666",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "0.1.2",
+        "files": {
+            "/modules/aioptimizedcombinations/includes/ajax.php": {
+                "text_to_match": [
+                    "(int)Tools::getValue('product').' AND pac.id_attribute IN ('.pSQL(Tools::getValue('attributes')).') GROUP BY pa.id_product_attribute HAVING number = '.count($attributes)"
+                ],
+                "text_to_replace": [
+                    "(int)Tools::getValue('product').' AND pac.id_attribute IN ('.implode(',', array_map('intval', explode(',', Tools::getValue('attributes')))).') GROUP BY pa.id_product_attribute HAVING number = '.count($attributes)"
+                ]
+            }
+        }
+    },
+    "CVE-2023-33665": {
+        "cve_id": "CVE-2023-33665",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "0.2.1",
+        "files": {
+            "/modules/aitable/includes/ajax.php": {
+                "text_to_match": [
+                    "'pac.id_attribute IN ('.pSql($attributes).','.(int)$line['id_attribute'].','.(int)$col['id_attribute'].') AND pa.id_product = '.(int)$product_id.' GROUP BY pa.id_product_attribute HAVING count = '.(int)$count"
+                ],
+                "text_to_replace": [
+                    "'pac.id_attribute IN ('.implode(',', array_map('intval', explode(',', $attributes))).','.(int)$line['id_attribute'].','.(int)$col['id_attribute'].') AND pa.id_product = '.(int)$product_id.' GROUP BY pa.id_product_attribute HAVING count = '.(int)$count"
+                ]
+            }
+        }
+    },
+    "CVE-2020-9368": {
+        "cve_id": "CVE-2020-9368",
+        "action": "remove",
+        "version_min": "0.0.0",
+        "version_max": "5.0.8",
+        "files": {
+            "/modules/giftonorder/getfile.php": {}
+        }
+    },
+    "CVE-2020-16194": {
+        "cve_id": "CVE-2020-16194",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.0.1",
+        "files": {
+            "/modules/opartdevis/opartdevis.php": {
+                "text_to_match": [
+                    ""
+                ],
+                "text_to_replace": [
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2021-36748": {
+        "cve_id": "CVE-2021-36748",
+        "action": "remove",
+        "version_min": "0.0.0",
+        "version_max": "1.7.7",
+        "files": {
+            "/modules/ph_simpleblog/models/SimpleBlogCategory.php": {
+                "text_to_match": [
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\' AND l.id_lang = ' . (int) $id_lang);",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\'');",
+                    "$sql->where('l.id_simpleblog_category = ' . $id_simpleblog_category . ' AND l.id_lang = ' . (int) $id_lang);",
+                    "$tmp_location = _PS_TMP_IMG_DIR_ . 'ph_simpleblog_cat_' . $object->id . '.' . $object->cover;",
+                    "$orig_location = _PS_MODULE_DIR_ . 'ph_simpleblog/covers_cat/' . $object->id . '.' . $object->cover;"
+                ],
+                "text_to_replace": [
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\' AND l.id_lang = ' . (int) $id_lang);",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\'');",
+                    "$sql->where('l.id_simpleblog_category = ' . (int) $id_simpleblog_category . ' AND l.id_lang = ' . (int) $id_lang);",
+                    "$tmp_location = _PS_TMP_IMG_DIR_ . 'ph_simpleblog_cat_' . (int) $object->id . '.' . $object->cover;",
+                    "$orig_location = _PS_MODULE_DIR_ . 'ph_simpleblog/covers_cat/' . (int) $object->id . '.' . $object->cover;"
+                ]
+            },
+            "/modules/ph_simpleblog/models/SimpleBlogPost.php": {
+                "text_to_match": [
+                    "$sql->where('sbp.id_simpleblog_post ' . $filter . ' (' . implode(',', $selected) . ')');",
+                    "$sql->where('sbp.id_simpleblog_post ' . $filter . ' (' . implode(',', $selected) . ')');",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\' AND l.id_lang = ' . (int) $id_lang);",
+                    "$sql->where('l.link_rewrite = \\'' . $rewrite . '\\'');",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `likes` = `likes` + 1 WHERE id_simpleblog_post = ' . $id_simpleblog_post;",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `likes` = `likes` - 1 WHERE id_simpleblog_post = ' . $id_simpleblog_post;",
+                    "$sql = 'SELECT `likes` FROM `' . _DB_PREFIX_ . 'simpleblog_post` WHERE id_simpleblog_post = ' . $id_simpleblog_post;",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `views` = `views` + 1 WHERE id_simpleblog_post = ' . $this->id_simpleblog_post;"
+                ],
+                "text_to_replace": [
+                    "$sql->where('sbp.id_simpleblog_post ' . ($filter == 'IN' ? 'IN' : 'NOT IN') . ' (' . implode(',', array_map('intval', $selected)) . ')');",
+                    "$sql->where('sbp.id_simpleblog_post ' . ($filter == 'IN' ? 'IN' : 'NOT IN') . ' (' . implode(',', array_map('intval', $selected)) . ')');",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\'');",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\' AND l.id_lang = ' . (int) $id_lang);",
+                    "$sql->where('l.link_rewrite = \\'' . pSQL($rewrite) . '\\'');",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `likes` = `likes` + 1 WHERE id_simpleblog_post = ' . (int) $id_simpleblog_post;",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `likes` = `likes` - 1 WHERE id_simpleblog_post = ' . (int) $id_simpleblog_post;",
+                    "$sql = 'SELECT `likes` FROM `' . _DB_PREFIX_ . 'simpleblog_post` WHERE id_simpleblog_post = ' . (int) $id_simpleblog_post;",
+                    "$sql = 'UPDATE `' . _DB_PREFIX_ . 'simpleblog_post` SET `views` = `views` + 1 WHERE id_simpleblog_post = ' . (int) $this->id_simpleblog_post;"
+                ]
+            },
+            "/modules/ph_simpleblog/models/SimpleBlogPostType.php": {
+                "text_to_match": [
+                    "$sql->where('slug = \\'' . $slug . '\\'');"
+                ],
+                "text_to_replace": [
+                    "$sql->where('slug = \\'' . pSQL($slug) . '\\''"
+                ]
+            }
+        }
+    },
+    "CVE-2022-31101": {
+        "cve_id": "CVE-2022-31101",
+        "action": "replace",
+        "version_min": "2.0.0",
+        "version_max": "2.1.1",
+        "files": {
+            "/src/Search/WishListProductSearchProvider.php": {
+                "text_to_match": [
+                    ""
+                ],
+                "text_to_replace": [
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2022-31181": {
+        "cve_id": "CVE-2022-31181",
+        "action": "replace",
+        "version_min": "1.6.0.10",
+        "version_max": "1.7.8.7",
+        "files": {
+            "/config/smarty.config.inc.php": {
+                "text_to_match": [
+                    "if (Configuration::get('PS_SMARTY_CACHING_TYPE') == 'mysql') {",
+                    "if (_PS_SMARTY_CACHING_TYPE_ == 'mysql') {"
+                ],
+                "text_to_replace": [
+                    "if (Configuration::get('PS_SMARTY_CACHING_TYPE') == 'mysql') {\n\tinclude _PS_CLASS_DIR_.'Smarty/SmartyCacheResourceMysql.php';\n\t$smarty->caching_type = 'mysql';\n}",
+                    "if (_PS_SMARTY_CACHING_TYPE_ == 'mysql') {\n\tinclude _PS_CLASS_DIR_.'Smarty/SmartyCacheResourceMysql.php';\n\t$smarty->caching_type = 'mysql';\n}"
+                ]
+            }
+        }
+    },
+    "CVE-2022-40842": {
+        "cve_id": "CVE-2022-40842",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.1.6",
+        "files": {
+            "/modules/ndk_advanced_custom_fields/rotateimg.php": {
+                "text_to_match": [
+                    "<?php"
+                ],
+                "text_to_replace": [
+                    "<?php\n\ndie();"
+                ]
+            }
+        }
+    },
+    "CVE-2022-40839": {
+        "cve_id": "CVE-2022-40839",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.1.6",
+        "files": {
+            "/modules/ndk_advanced_custom_fields/models/ndkCf.php": {
+                "text_to_match": [
+                    "AND width = \\''.$width.'\\' AND height = \\''.$height.'\\'');",
+                    "ORDER BY ABS(width-'.$width.') ASC, ABS(height-'.$height.') ASC LIMIT 1';"
+                ],
+                "text_to_replace": [
+                    "AND width = \\''.pSQL($width).'\\' AND height = \\''.pSQL($height).'\\'');",
+                    "AND width >= '.(float)$width.' AND height >= '.(float)$height.' LIMIT 1';"
+                ]
+            }
+        }
+    },
+    "CVE-2022-44727": {
+        "cve_id": "CVE-2022-44727",
+        "action": "replace",
+        "version_min": "1.5.0",
+        "version_max": "2.1.2",
+        "files": {
+            "/modules/lgcookieslaw/classes/LGCookiesLawPurpose.php": {
+                "text_to_match": [
+                    "if (!is_null($enabled_purposes)) {"
+                ],
+                "text_to_replace": [
+                    "if (!is_null($enabled_purposes)) {\n\t$enabled_purposes = implode(', ', array_map('intval', explode(',', $enabled_purposes)));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-26864": {
+        "cve_id": "CVE-2023-26864",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.1.18",
+        "files": {
+            "/modules/smplredirectionsmanager/classes/SmplTools.php": {
+                "text_to_match": [
+                    "pSQL(preg_replace('#\\?.*#', '', $smpl_relative_uri)).'?'.$str_querystring.'\"';",
+                    "pSQL(preg_replace('#\\?.*#', '', $smpl_absolute_uri)).'?'.$str_querystring.'\"';"
+                ],
+                "text_to_replace": [
+                    "pSQL(preg_replace('#\\?.*#', '', $smpl_relative_uri)).'?'.pSQL($str_querystring).'\"';",
+                    "pSQL(preg_replace('#\\?.*#', '', $smpl_absolute_uri)).'?'.pSQL($str_querystring).'\"';"
+                ]
+            }
+        }
+    },
+    "CVE-2022-46639": {
+        "cve_id": "CVE-2022-46639",
+        "action": "replace",
+        "version_min": "1.1.0",
+        "version_max": "1.1.99",
+        "files": {
+            "/modules/correosoficial/descarga_etiqueta.php": {
+                "text_to_match": [
+                    "$filename = $_REQUEST['filename'];",
+                    "$path = $_REQUEST['path'];"
+                ],
+                "text_to_replace": [
+                    "$filename = basename($_REQUEST['filename']);",
+                    "$path = 'pdftmp';\n\n$pathinfo = pathinfo($path . \"/\" . $filename);\nif ($pathinfo['extension'] != 'pdf') {\n\texit;\n}"
+                ]
+            }
+        }
+    },
+    "CVE-2022-46965": {
+        "cve_id": "CVE-2022-46965",
+        "action": "replace",
+        "version_min": "1.2.1",
+        "version_max": "1.7.1",
+        "files": {
+            "/modules/totadministrativemandate/pdfmandate15.php": {
+                "text_to_match": [
+                    "$SQL = 'SELECT `id_order` FROM `'._DB_PREFIX_.\"orders` WHERE `reference` = '\".$reference.\"' \";"
+                ],
+                "text_to_replace": [
+                    "$SQL = 'SELECT `id_order` FROM `'._DB_PREFIX_.\"orders` WHERE `reference` = '\".pSQL($reference).\"' \";"
+                ]
+            },
+            "/modules/totadministrativemandate/pdfmandate16.php": {
+                "text_to_match": [
+                    "$SQL = 'SELECT `id_order` FROM `'._DB_PREFIX_.\"orders` WHERE `reference` = '\".$reference.\"' \";"
+                ],
+                "text_to_replace": [
+                    "$SQL = 'SELECT `id_order` FROM `'._DB_PREFIX_.\"orders` WHERE `reference` = '\".pSQL($reference).\"' \";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-23315": {
+        "cve_id": "CVE-2023-23315",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.5.4",
+        "files": {
+            "/modules/stripejs/controllers/front/validation.php": {
+                "text_to_match": [
+                    "$conveyor = array();",
+                    "} elseif (Tools::getIsset('payment_intent') && Tools::getIsset('redirect_status') && Tools::getValue('redirect_status') == failed) {",
+                    "//sleep(2);",
+                    "$conveyor['cart_id'] = Db::getInstance()->getValue('SELECT id_cart FROM ' . _DB_PREFIX_ . 'stripejs_transaction WHERE id_payment_intent = \"' . Tools::getValue('payment_intent') . '\" AND type = \"payment\"');",
+                    "$conveyor['cart_id'] = Tools::getValue('cid');",
+                    "$conveyor['token'] = Db::getInstance()->getValue('SELECT id_payment_intent FROM ' . _DB_PREFIX_ . 'stripejs_transaction WHERE id_cart = ' . Tools::getValue('cid') . ' AND type = \"payment\"');",
+                    "$arr_content = array('content_only' => 1, 'attempt' => (int) Tools::getValue('attempt') + 1, 'cid' => $conveyor['cart_id']);",
+                    "$conveyor['source_type'] = $result_json->payment_method_details->type;"
+                ],
+                "text_to_replace": [
+                    "$conveyor = array();\n\nif (!$this->context->cookie->logged) {\n\treturn die('<h2>' . $this->module->l('Your transaction will be validated soon.') . '</h2>');\n}",
+                    "} elseif (Tools::getIsset('payment_intent') && Tools::getIsset('redirect_status') && Tools::getValue('redirect_status') == 'failed') {",
+                    "",
+                    "$conveyor['cart_id'] = Db::getInstance()->getValue('SELECT id_cart FROM ' . _DB_PREFIX_ . 'stripejs_transaction WHERE id_payment_intent = \"' . pSQL(Tools::getValue('payment_intent')) . '\" AND type = \"payment\"');",
+                    "$conveyor['cart_id'] = (int) Tools::getValue('cid');",
+                    "$conveyor['token'] = Db::getInstance()->getValue('SELECT id_payment_intent FROM ' . _DB_PREFIX_ . 'stripejs_transaction WHERE id_cart = ' . (int) Tools::getValue('cid') . ' AND type = \"payment\"');",
+                    "$arr_content = array('content_only' => 1, 'attempt' => (int) Tools::getValue('attempt') + 1, 'cid' => (int) $conveyor['cart_id']);",
+                    "$conveyor['source_type'] = NULL;"
+                ]
+            }
+        }
+    },
+    "CVE-2023-24763": {
+        "cve_id": "CVE-2023-24763",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.12.99",
+        "files": {
+            "/modules/xenforum/classes/XenForumAttachment.php": {
+                "text_to_match": [
+                    "FROM '._DB_PREFIX_.'xenforum_attachment WHERE id_xenforum_attachment IN ('.implode(',', $ids).');';"
+                ],
+                "text_to_replace": [
+                    "FROM '._DB_PREFIX_.'xenforum_attachment WHERE id_xenforum_attachment IN ('.implode(', ', array_map('intval', $ids)).');';"
+                ]
+            },
+            "/modules/xenforum/classes/XenForumCat.php": {
+                "text_to_match": [
+                    "$ql .= ' OR pc.`id_xenforum_cat` IN ('.pSQL($validations).')';",
+                    "$sql .= ' AND pc.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';",
+                    "$sql .= ' AND pc.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';"
+                ],
+                "text_to_replace": [
+                    "$ql .= ' OR pc.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $validations)).')';",
+                    "$sql .= ' AND pc.`id_xenforum_cat` IN ('. implode(', ', array_map('intval', $availables)) . ')';",
+                    "$sql .= ' AND pc.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $availables)).')';"
+                ]
+            },
+            "/modules/xenforum/classes/XenForumPost.php": {
+                "text_to_match": [
+                    "WHERE p.active= 1 AND x.id_xenforum_cat IN ('.pSQL(implode(',', $category_ids)).')';",
+                    "$sql .= ' AND b.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';"
+                ],
+                "text_to_replace": [
+                    "WHERE p.active= 1 AND x.id_xenforum_cat IN ('.implode(', ', array_map('intval', $category_ids)).')';",
+                    "$sql .= ' AND b.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $availables)).')';"
+                ]
+            },
+            "/modules/xenforum/classes/XenForumTopic.php": {
+                "text_to_match": [
+                    "WHERE `active` = 1 AND `id_xenforum_cat` IN ('.pSQL(implode(',', $category_ids)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';",
+                    "WHERE a.`active` = 1 AND c.`active` = 1 AND a.`id_xenforum_cat` IN ('.pSQL(implode(',', $category_ids)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.pSQL(implode(',', $availables)).')';"
+                ],
+                "text_to_replace": [
+                    "WHERE `active` = 1 AND `id_xenforum_cat` IN ('.implode(', ', array_map('intval', $category_ids)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $availables)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $availables)).')';",
+                    "WHERE a.`active` = 1 AND c.`active` = 1 AND a.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $category_ids)).')';",
+                    "$sql .= ' AND a.`id_xenforum_cat` IN ('.implode(', ', array_map('intval', $availables)).')';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-25207": {
+        "cve_id": "CVE-2023-25207",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "6.1.2",
+        "files": {
+            "/modules/dpdfrance/dpdfrance.php": {
+                "text_to_match": [
+                    "$sql      = \"UPDATE \" . _DB_PREFIX_ . \"dpdfrance_order SET override_return_street = '\" . (string)$param['street'] . \"', override_return_zip = '\" . (string)$param['zip'] . \"', override_return_city = '\" . (string)$param['city'] . \"', override_return_phone = '\" . (string)$param['phone'] . \"' WHERE id_order_dpd = '\" . $param['order'] . \"';\";"
+                ],
+                "text_to_replace": [
+                    "$sql      = \"UPDATE \" . _DB_PREFIX_ . \"dpdfrance_order SET override_return_street = '\" . pSQL($param['street']) . \"', override_return_zip = '\" . pSQL($param['zip']) . \"', override_return_city = '\" . pSQL($param['city']) . \"', override_return_phone = '\" . pSQL($param['phone']) . \"' WHERE id_order_dpd = '\" . pSQL($param['order']) . \"';\";"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27034": {
+        "cve_id": "CVE-2023-27034",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "6.1.2",
+        "files": {
+            "/modules/jmsblog/controllers/front/archive.php": {
+                "text_to_match": [
+                    "' AND DATE_FORMAT(hss.created,\"%Y-%m\") LIKE \"%'.$_month.'%\""
+                ],
+                "text_to_replace": [
+                    "' AND DATE_FORMAT(hss.created,\"%Y-%m\") LIKE \"%'.pSQL($_month).'%\""
+                ]
+            },
+            "/modules/jmsblog/controllers/front/post.php": {
+                "text_to_match": [
+                    "WHERE pc.`email` = \\''.$email.'\\'"
+                ],
+                "text_to_replace": [
+                    "WHERE pc.`email` = \\''.pSQL($email).'\\'"
+                ]
+            },
+            "/modules/jmsblog/controllers/front/tag.php": {
+                "text_to_match": [
+                    "' AND hssl.`tags` LIKE \"%'.$tag.'%\""
+                ],
+                "text_to_replace": [
+                    "' AND hssl.`tags` LIKE \"%'.pSQL($tag).'%\""
+                ]
+            }
+        }
+    },
+    "CVE-2023-29630": {
+        "cve_id": "CVE-2023-29630",
+        "action": "replace",
+        "version_min": "1.1.0",
+        "version_max": "2.0.99",
+        "files": {
+            "/modules/jmsmegamenu/ajax_jmsmegamenu.php": {
+                "text_to_match": [
+                    "UPDATE `'._DB_PREFIX_.'jmsmegamenu` SET `params` = \\''.Tools::getValue('params').'\\'"
+                ],
+                "text_to_replace": [
+                    "UPDATE `'._DB_PREFIX_.'jmsmegamenu` SET `params` = \\''.pSQL(Tools::getValue('params')).'\\'"
+                ]
+            }
+        }
+    },
+    "CVE-2023-29632": {
+        "cve_id": "CVE-2023-29632",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/jmspagebuilder/ajax_jmspagebuilder.php": {
+                "text_to_match": [
+                    "$where  = ' WHERE i.`id_product` IN ('.$productids.') AND (i.`cover` IS NULL OR i.`cover` = 0)';"
+                ],
+                "text_to_replace": [
+                    "$where  = ' WHERE i.`id_product` IN ('.implode(',', array_map('intval', explode(',', $productids))).') AND (i.`cover` IS NULL OR i.`cover` = 0)';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-29629": {
+        "cve_id": "CVE-2023-29629",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/modules/jmspagebuilder/ajax_jmsthemelayout.php": {
+                "text_to_match": [
+                    "$query = 'UPDATE `'._DB_PREFIX_.'jmsadv_position` SET `col_lg` = '.$pos_obj[1].', `col_md` = '.$pos_obj[2].', `col_sm` = '.$pos_obj[3].', `col_xs` = '.$pos_obj[4].",
+                    "'WHERE `id_position` = '.$pos_obj[0];"
+                ],
+                "text_to_replace": [
+                    "$query = 'UPDATE `'._DB_PREFIX_.'jmsadv_position` SET `col_lg` = '. (int)$pos_obj[1].', `col_md` = '. (int)$pos_obj[2].', `col_sm` = '. (int)$pos_obj[3].', `col_xs` = '. (int)$pos_obj[4].",
+                    "'WHERE `id_position` = '. (int)$pos_obj[0];"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27569": {
+        "cve_id": "CVE-2023-27569",
+        "action": "replace",
+        "version_min": "1.2.0",
+        "version_max": "2.1.4",
+        "files": {
+            "/modules/eo_tags/eo_tags.php": {
+                "text_to_match": [
+                    "'cid'     => $cid,",
+                    "'cookie'  => serialize($_COOKIE['_ga']),",
+                    "'id_guest'     => $cookie->id_guest,",
+                    "'http_referer' => $referral['http_referer'],",
+                    "'request_uri'  => $referral['request_uri'],",
+                    "'user_agent'   => $user_agent,",
+                    "'id_guest'     => $cookie->id_guest,",
+                    "'http_referer' => $http_referer,",
+                    "'request_uri'  => $request_uri,",
+                    "'user_agent'   => $user_agent,"
+                ],
+                "text_to_replace": [
+                    "'cid'     => pSQL($cid),",
+                    "'cookie'  => pSQL(serialize($_COOKIE['_ga'])),",
+                    "'id_guest'     => (int)$cookie->id_guest,",
+                    "'http_referer' => pSQL($referral['http_referer']),",
+                    "'request_uri'  => pSQL($referral['request_uri']),",
+                    "'user_agent'   => pSQL($user_agent),",
+                    "'id_guest'     => (int)$cookie->id_guest,",
+                    "'http_referer' => pSQL($http_referer),",
+                    "'request_uri'  => pSQL($request_uri),",
+                    "'user_agent'   => pSQL($user_agent),"
+                ]
+            },
+            "/modules/eo_tags/classes/EoTagsStats.php": {
+                "text_to_match": [
+                    "'user_agent'  => $user_agent,"
+                ],
+                "text_to_replace": [
+                    "'user_agent'  => pSQL($user_agent),"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27637": {
+        "cve_id": "CVE-2023-27637",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.1.4",
+        "files": {
+            "/modules/tshirtecommerce/controllers/front/designer.php": {
+                "text_to_match": [
+                    "$settings = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS(\"SELECT `design_product_id` FROM `\"._DB_PREFIX_.\"product` WHERE `id_product`=\".$parent_id);"
+                ],
+                "text_to_replace": [
+                    "$settings = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS(\"SELECT `design_product_id` FROM `\"._DB_PREFIX_.\"product` WHERE `id_product`=\".(int)$parent_id);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27638": {
+        "cve_id": "CVE-2023-27638",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.1.4",
+        "files": {
+            "/modules/tshirtecommerce/tshirtecommerce.php": {
+                "text_to_match": [
+                    "'tshirtecommerce_design_cart_id'=> $tdci,",
+                    "'tshirtecommerce_design_type'   => $tdt),"
+                ],
+                "text_to_replace": [
+                    "'tshirtecommerce_design_cart_id'=> pSQL($tdci),",
+                    "'tshirtecommerce_design_type'   => pSQL($tdt)),"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27847": {
+        "cve_id": "CVE-2023-27847",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.0.1",
+        "files": {
+            "/modules/xipblog/classes/xipcategoryclass.php": {
+                "text_to_match": [
+                    "$sql .= ' WHERE xc.`category_type` = \"'.($category_type ? $category_type : 'category').'\" AND xc.`id_xipcategory` = '.$id_category;",
+                    "$sql .= ' WHERE xc.`category_type` = \"'.($category_type ? $category_type : 'category').'\" AND xcl.`link_rewrite` = \"'.$rewrite.'\" ';",
+                    "$sql .= ' WHERE xc.`active` = 1 AND  category_type = \"'.$category_type.'\" ';",
+                    "$sql .= ' AND category_group = '.$category_group;"
+                ],
+                "text_to_replace": [
+                    "$sql .= ' WHERE xc.`category_type` = \"'.($category_type ? pSQL($category_type) : 'category').'\" AND xc.`id_xipcategory` = '.$id_category;",
+                    "$sql .= ' WHERE xc.`category_type` = \"'.($category_type ? pSQL($category_type) : 'category').'\" AND xcl.`link_rewrite` = \"'.pSQL($rewrite).'\" ';",
+                    "$sql .= ' WHERE xc.`active` = 1 AND  category_type = \"'.pSQL($category_type).'\" ';",
+                    "$sql .= ' AND category_group = \"'.pSQL($category_type).'\" ';"
+                ]
+            },
+            "/modules/xipblog/classes/xippostsclass.php": {
+                "text_to_match": [
+                    "$queryval .= '('.(int)$id_post.','.(int)$id_category.',\"'.$tag.'\"),';",
+                    "$sql .= ' WHERE xc.`post_type` = \"'.($post_type?$post_type:'post').'\" AND xc.`id_xipposts` = '.$id_post;",
+                    "$sql .= ' WHERE xc.`post_type` = \"'.($post_type ? $post_type : 'post').'\" AND xcl.`link_rewrite` = \"'.$rewrite.'\" ';",
+                    "$sql .= ' WHERE xc.`category_type` = \"'.($category_type ? $category_type : 'category').'\" AND xc.`id_xipcategory` = '.$id_category;",
+                    "$sql .= ' WHERE xc.`category_type` = \"tag\" AND xcl.`name` = \"'.$tag.'\"';",
+                    "INNER JOIN `'._DB_PREFIX_.'xipcategory` xc ON (xcp.`id_category` = xc.`id_xipcategory` AND xc.`category_type` = \"'.$tag.'\")",
+                    "$sql .= ' WHERE xcp.`id_post` = '.$id_post.' AND xcp.`type` = \"'.$tag.'\"';",
+                    "INNER JOIN `'._DB_PREFIX_.'xipcategory` xc ON (xcp.`id_category` = xc.`id_xipcategory` AND xc.`category_type` = \"'.$tag.'\")",
+                    "$sql .= ' WHERE xcp.`id_post` = '.$id_post.' AND xcp.`type` = \"'.$tag.'\"';",
+                    "$sql .= ' WHERE xc.`category_type` = \"'.$tag.'\" ';"
+                ],
+                "text_to_replace": [
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ]
+            }
+        }
+    },
+    "CVE-2023-26858": {
+        "cve_id": "CVE-2023-26858",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "3.1.5",
+        "files": {
+            "/modules/faqs/classes/faqsPost.php": {
+                "text_to_match": [
+                    "$productCategoriesIds = implode(',', $productCategoriesIds);"
+                ],
+                "text_to_replace": [
+                    "$productCategoriesIds = implode(',', array_map('intval', explode(',',$productCategoriesIds)));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-26860": {
+        "cve_id": "CVE-2023-26860",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.3",
+        "files": {
+            "/modules/lgbudget/controllers/front/budget.php": {
+                "text_to_match": [
+                    "\"' . $name . '\","
+                ],
+                "text_to_replace": [
+                    "\"' . pSQL($name) . '\","
+                ]
+            }
+        }
+    },
+    "CVE-2023-27844": {
+        "cve_id": "CVE-2023-27844",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "0.99.99",
+        "files": {
+            "/modules/leurlrewrite/override/classes/Dispatcher.php": {
+                "text_to_match": [
+                    "$results = Db::getInstance()->executeS(\"SELECT id_desc, type, lang_code FROM \" . _DB_PREFIX_ . \"lecm_rewrite WHERE link_rewrite = '\" . $url_rewrite . \"'\");"
+                ],
+                "text_to_replace": [
+                    "$results = Db::getInstance()->executeS(\"SELECT id_desc, type, lang_code FROM \" . _DB_PREFIX_ . \"lecm_rewrite WHERE link_rewrite = '\" . pSQL($url_rewrite) . \"'\");"
+                ]
+            },
+            "/override/classes/Dispatcher.php": {
+                "text_to_match": [
+                    "$results = Db::getInstance()->executeS(\"SELECT id_desc, type, lang_code FROM \" . _DB_PREFIX_ . \"lecm_rewrite WHERE link_rewrite = '\" . $url_rewrite . \"'\");"
+                ],
+                "text_to_replace": [
+                    "$results = Db::getInstance()->executeS(\"SELECT id_desc, type, lang_code FROM \" . _DB_PREFIX_ . \"lecm_rewrite WHERE link_rewrite = '\" . pSQL($url_rewrite) . \"'\");"
+                ]
+            }
+        }
+    },
+    "CVE-2023-28839": {
+        "cve_id": "CVE-2023-28839",
+        "action": "replace",
+        "version_min": "1.3.99",
+        "version_max": "1.8.2",
+        "files": {
+            "/modules/shoppingfeed/classes/ShoppingfeedToken.php": {
+                "text_to_match": [
+                    "->where(\"content = '$token'\")"
+                ],
+                "text_to_replace": [
+                    "->where('content = \"' . pSQL($token) . '\"')"
+                ]
+            }
+        }
+    },
+    "CVE-2023-26865": {
+        "cve_id": "CVE-2023-26865",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.2.27",
+        "files": {
+            "/modules/bdroppy/controllers/front/cron.php": {
+                "text_to_match": [
+                    "->where(\"reference = '\" . Tools::getValue('reference') . \"'\");"
+                ],
+                "text_to_replace": [
+                    "->where(\"reference = '\" . pSQL(Tools::getValue('reference')) . \"'\");"
+                ]
+            }
+        }
+    },
+    "CVE-2023-27843": {
+        "cve_id": "CVE-2023-27843",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "5.4.2",
+        "files": {
+            "/modules/askforaquote/classes/QuotesProduct.php": {
+                "text_to_match": [
+                    "WHERE qp.`id_product` = ' . pSQL($id_product) . '",
+                    "AND qp.`id_product_attribute` = ' . pSQL($id_product_attribute)",
+                    "if ((int)$current_qty < 0) {",
+                    "//update current product in cart",
+                    "SET `quantity` = ' . pSQL($current_qty) . ', `date_upd` = \"' . pSQL(date('Y-m-d H:i:s', time())) . '\"",
+                    "WHERE `id_product` = ' . pSQL($id_product) . ' AND `id_quote` LIKE \"' . pSQL($id_quote) .",
+                    "'\" AND `id_product_attribute` = ' . pSQL($id_product_attribute) . '",
+                    "WHERE `id_product` = ' . pSQL($id_product) . '",
+                    "AND `id_product_attribute` = ' . pSQL($id_product_attribute)"
+                ],
+                "text_to_replace": [
+                    "WHERE qp.`id_product` = ' . (int) $id_product . '",
+                    "AND qp.`id_product_attribute` = ' . (int) $id_product_attribute",
+                    "if ((int) $current_qty < 0) {",
+                    "// update current product in cart",
+                    "SET `quantity` = ' . (int) $current_qty . ', `date_upd` = \"' . pSQL(date('Y-m-d H:i:s', time())) . '\"",
+                    "WHERE `id_product` = ' . (int) $id_product . ' AND `id_quote` LIKE \"' . pSQL($id_quote) .",
+                    "'\" AND `id_product_attribute` = ' . (int) $id_product_attribute . '",
+                    "WHERE `id_product` = ' . (int) $id_product . '",
+                    "AND `id_product_attribute` = ' . (int) $id_product_attribute"
+                ]
+            }
+        }
+    },
+    "CVE-2023-30189": {
+        "cve_id": "CVE-2023-30189",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "1.0.0",
+        "files": {
+            "/modules/posstaticblocks/posstaticblocks.php": {
+                "text_to_match": [
+                    "WHERE m.`id_module` = ' . $id_module);",
+                    "$sql = 'SELECT * FROM '._DB_PREFIX_.'hook_module AS `ps` LEFT JOIN '._DB_PREFIX_.'hook AS `ph` ON `ps`.`id_hook` = `ph`.`id_hook`  WHERE `ps`.`id_module`='.$id_module.' AND `ps`.`id_shop` = '.$id_shop ;",
+                    "$sql = 'SELECT psb.`hook_module` FROM '._DB_PREFIX_.'pos_staticblock AS psb LEFT JOIN '._DB_PREFIX_.'pos_staticblock_shop AS pss ON psb.`id_posstaticblock`= pss.`id_posstaticblock` WHERE  psb.`name_module` =\"'.$name_module.'\" AND pss.`id_shop` = \"'.$id_shop.'\"';"
+                ],
+                "text_to_replace": [
+                    "WHERE m.`id_module` = ' . (int) $id_module);",
+                    "$sql = 'SELECT * FROM '._DB_PREFIX_.'hook_module AS `ps` LEFT JOIN '._DB_PREFIX_.'hook AS `ph` ON `ps`.`id_hook` = `ph`.`id_hook`  WHERE `ps`.`id_module`='. (int) $id_module.' AND `ps`.`id_shop` = '. (int) $id_shop ;",
+                    "$sql = 'SELECT psb.`hook_module` FROM '._DB_PREFIX_.'pos_staticblock AS psb LEFT JOIN '._DB_PREFIX_.'pos_staticblock_shop AS pss ON psb.`id_posstaticblock`= pss.`id_posstaticblock` WHERE  psb.`name_module` =\"'.pSQL($name_module).'\" AND pss.`id_shop` = \"'. (int) $id_shop.'\"';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-30838": {
+        "cve_id": "CVE-2023-30838",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/classes/Validate.php": {
+                "text_to_match": [
+                    "$events .= '|onselectstart|onstart|onstop';"
+                ],
+                "text_to_replace": [
+                    "$events .= '|onselectstart|onstart|onstop|onanimationcancel|onanimationend|onanimationiteration|onanimationstart';"
+                ]
+            }
+        }
+    },
+    "CVE-2023-30839": {
+        "cve_id": "CVE-2023-30839",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "99.99.99",
+        "files": {
+            "/classes/db/Db.php": {
+                "text_to_match": [
+                    "if (defined('_PS_MODE_DEV_') && _PS_MODE_DEV_) {throw new PrestaShopDatabaseException('Db->executeS() must be used only with select, show, explain or describe queries');}return $this->execute($sql, $use_cache);"
+                ],
+                "text_to_replace": [
+                    "throw new PrestaShopDatabaseException('Db->executeS() must be used only with select, show, explain or describe queries');"
+                ]
+            }
+        }
+    },
+    "CVE-2023-48926": {
+        "cve_id": "CVE-2023-48926",
+        "action": "remove",
+        "version_min": "2.3.3",
+        "version_max": "2.3.3",
+        "files": {
+            "/modules/totloyaltyadvanced/controllers/front/orderstatus.php": {
+                "text_to_match": [
+                ],
+                "text_to_replace": [
+                ]
+            }
+        }
+    },
+    "CVE-2023-6921": {
+        "cve_id": "CVE-2023-6921",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.1.3",
+        "files": {
+            "/modules/pshowconversion/pshowconversion.php": {
+                "text_to_match": [
+                ],
+                "text_to_replace": [
+                ]
+            }
+        }
+    },
+    "CVE-2023-45383": {
+        "cve_id": "CVE-2023-45383",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "2.5.9",
+        "files": {
+            "/modules/sonice_etiquetage/functions/download_label.php": {
+                "text_to_match": [
+                    "$file = Tools::getValue('file');"
+                ],
+                "text_to_replace": [
+                    "$file = basename(Tools::getValue('file'));"
+                ]
+            },
+            "/modules/sonice_etiquetage/functions/download_label_img.php": {
+                "text_to_match": [
+                    "$file = $_REQUEST['file'];"
+                ],
+                "text_to_replace": [
+                    "$file = basename($_REQUEST['file']);"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46346": {
+        "cve_id": "CVE-2023-46346",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "4.1.1",
+        "files": {
+            "/modules/exportproducts/download.php": {
+                "text_to_match": [
+                    "$file = Tools::getValue('url');"
+                ],
+                "text_to_replace": [
+                    "$file = basename(Tools::getValue('url'));"
+                ]
+            }
+        }
+    },
+    "CVE-2023-46354": {
+        "cve_id": "CVE-2023-46354",
+        "action": "replace",
+        "version_min": "0.0.0",
+        "version_max": "5.1.6",
+        "files": {
+            "modules/ordersexport/ordersexport.php": {
+                "text_to_match": [
+                ],
+                "text_to_replace": [
+                ]
+            }
+        }
+    }
+}

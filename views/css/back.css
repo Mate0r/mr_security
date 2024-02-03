@@ -1,0 +1,23 @@
+#mr_security_admin .badge.badge-secondary {
+    background-color: #888;
+}
+
+#mr_security_admin .d-flex {
+    display: flex !important;
+}
+
+#mr_security_admin .align-items-center {
+    align-items: center !important;
+}
+
+#mr_security_admin .p-0 {
+    padding: 0 !important;
+}
+
+#mr_security_admin .m-0 {
+    margin: 0 !important;
+}
+
+#mr_security_admin .w-100 {
+    width: 100% !important;
+}
